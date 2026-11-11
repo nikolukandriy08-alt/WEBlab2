@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <title>Контакти</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="header_always_on_top">
+    <nav class="nav">
+        <ul>
+            <li><a href="#Registration_form">Форма реєстрації</a></li>
+            <li><a href="#Login_form">Форма входу</a></li>
+            <li><a href="#Feedback">Зворотній зв'язок</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>Загальна інформація про тему</h1>
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/1280px-Albert_Einstein_Head_cleaned.jpg?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Картинка ліворуч" class="img_left">
+        <p>Загальна інформація про тему. Текст обтікає зображення з лівого боку.</p>
+
+        <img src="https://static.yakaboo.ua/media/entity/author/4/_/4_4_2.jpg" alt="Картинка праворуч" class="img_right">
+        <p>Загальна інформація про тему. Текст обтікає зображення з правого боку.</p>
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOqdDNvr7eXNYk0_-BMlGu0WaCd7wowiIvWLeisRza8w07r1gQeALXH0Q&s=10" alt="Без обтікання" class="img_without_flow">
+        <p>Загальна інформація про тему. Зображення розміщено в звичайному потоці без обтікання.</p>
+    </section>
+
+    <section class="position-demo">
+        <div class="AandR_positioning">
+            <p>Абсолютне та відносне позиціонування.</p>
+            <div class="Repeating_elements">Повторювані елементи</div>
+        </div>
+    </section>
+
+    <section id="Registration_form">
+            <form id="reg-form" action="/submit" method="POST" class="custom-form">
+                <fieldset>
+                    <legend>Форма реєстрації</legend>
+
+                    <div class="avatar-placeholder">
+                        <span class="icon-avatar">👤</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fname">Ім'я:</label>
+                        <input type="text" id="fname" name="fname" placeholder="Ім'я" required minlength="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lname">Прізвище:</label>
+                        <input type="text" id="lname" name="lname" placeholder="Прізвище" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Стать:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="male" name="gender" value="male">
+                            <label for="male">Чоловіча</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Жіноча</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Вік:</label>
+                        <input type="number" id="age" name="age" min="12" max="100" value="21">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Дата народження:</label>
+                        <input type="date" id="dob" name="dob">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Країна проживання:</label>
+                        <select id="country" name="country">
+                            <option value="">Оберіть країну проживання</option>
+                            <option value="ua">Україна</option>
+                            <option value="pl">Польща</option>
+                            <option value="de">Німеччина</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Номер телефону:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+38(0XX)XXX-XX-XX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="social">Соцмережа:</label>
+                        <input type="url" id="social" name="social" placeholder="Посилання на соцмережу">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Електронна пошта:</label>
+                        <input type="email" id="email" name="email" required placeholder="Ел. пошта">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass">Пароль:</label>
+                        <input type="password" id="pass" name="pass" required minlength="8" placeholder="Пароль">
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Чи згідні Ви з умовами?</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Зареєструватися</button>
+                        <button type="reset" class="btn-reset">Відміна</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </section>
+
+    <section id="Login_form">
+        <form id="login-form" action="/login" method="POST" class="custom-form login-box">
+            <fieldset>
+                <legend>Форма входу:</legend>
+                <div class="form-group">
+                    <label for="login-email">Логін:</label>
+                    <input type="email" id="login-email" name="login_email" required placeholder="Логін / Email">
+                </div>
+                <div class="form-group">
+                    <label for="login-pass">Пароль:</label>
+                    <input type="password" id="login-pass" name="login_pass" required placeholder="Пароль">
+                </div>
+                <button type="submit" class="btn-submit">Вхід</button>
+            </fieldset>
+        </form>
+    </section>
+
+    <section id="Feedback" class="Feedback">
+        <form id="feedback-form" action="/feedback" method="POST" class="custom-form feedback-box">
+            <fieldset>
+                <legend>Форма зворотнього зв'язку:</legend>
+                <div class="form-group">
+                    <label for="fb-name">Ім'я:</label>
+                    <input type="text" id="fb-name" name="fb_name" required placeholder="Ваше ім'я">
+                </div>
+                <div class="form-group">
+                    <label for="fb-email">Ел. пошта:</label>
+                    <input type="email" id="fb-email" name="fb_email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="fb-subject">Тема повідомлення:</label>
+                    <input type="text" id="fb-subject" name="fb_subject" placeholder="Тема">
+                </div>
+                <div class="form-group">
+                    <label for="fb-msg">Повідомлення:</label>
+                    <textarea id="fb-msg" name="fb_msg" rows="4" placeholder="Ваше повідомлення..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Відправити</button>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="social-links section-box">
+        <h3>Посилання на соц.мережі</h3>
+        <div class="social-icons">
+            <a href="#" class="icon-circle">FB</a>
+            <a href="#" class="icon-circle">IG</a>
+            <a href="#" class="icon-circle">TG</a>
+            <a href="#" class="icon-circle">YT</a>
+        </div>
+    </section>
+</main>
+
+<div class="fixed-widget">
+    <a href="index.html">Головна</a>
+</div>
+</body>
+</html>
