@@ -24,7 +24,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 5px;
-    box-shadow: 0 8px 20px #ebdaff;
+    box-shadow: 0 8px 20px #dec1ff;
     text-wrap: pretty;
 }
 
