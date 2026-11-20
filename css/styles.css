@@ -5,7 +5,7 @@
 }
 
 html {
-    font-size: 16px; /* 1rem = 16px */
+    font-size: 16px;
     scroll-behavior: smooth;
 }
 
@@ -377,5 +377,214 @@ main section, .main-info {
         right: 10px;
         padding: 0.5rem 0.75rem;
         font-size: 0.8rem;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.student-badge {
+    background: #ffffff;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    color: #333;
+    border-bottom: 2px solid #dcb5f2;
+}
+
+.variant-title {
+    color: #b24fd3;
+    font-weight: bold;
+    margin-top: 0.25rem;
+    letter-spacing: 0.5px;
+}
+
+.error-msg {
+    color: #d93025;
+    font-size: 0.85rem;
+    min-height: 1.1rem;
+    margin-top: 0.25rem;
+}
+
+.input-invalid {
+    border-color: #d93025 !important;
+    background-color: #fff6f6 !important;
+}
+
+.quiz-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #dcb5f2;
+    margin-bottom: 1.25rem;
+    font-weight: bold;
+    color: #764ba2;
+}
+
+.question-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #dcb5f2;
+}
+
+.question-type-badge {
+    display: inline-block;
+    background: #ebdaff;
+    color: #764ba2;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+}
+
+.question-title {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.code-snippet {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.6rem;
+    background: #f9f7fc;
+    border: 1px solid #dcb5f2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.option-label:hover {
+    background: #ebdaff;
+}
+
+.code-input-area {
+    width: 100%;
+    padding: 0.75rem;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.95rem;
+    border: 2px solid #dcb5f2;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.live-check-status {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Drag & Drop */
+.dnd-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.dnd-pool, .dnd-targets {
+    background: #f9f7fc;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px dashed #b24fd3;
+}
+
+.dnd-item {
+    background: #b24fd3;
+    color: #fff;
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: grab;
+    font-weight: bold;
+    user-select: none;
+}
+
+.dnd-item:active {
+    cursor: grabbing;
+}
+
+.dnd-slot-row {
+    margin-bottom: 0.85rem;
+}
+
+.dnd-slot-label {
+    font-weight: bold;
+    color: #764ba2;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+.dnd-dropzone {
+    min-height: 44px;
+    background: #ffffff;
+    border: 2px dashed #71d5ff;
+    border-radius: 8px;
+    padding: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.dnd-dropzone.drag-over {
+    background: #e0f7ff;
+    border-color: #b24fd3;
+}
+
+/* Результати та історія */
+.score-box {
+    background: #ffffff;
+    border: 2px solid #b24fd3;
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+.result-item {
+    padding: 0.85rem;
+    border-radius: 8px;
+    margin-bottom: 0.65rem;
+    border-left: 5px solid #ccc;
+    background: #ffffff;
+}
+
+.result-item.correct { border-left-color: #2e7d32; }
+.result-item.incorrect { border-left-color: #d93025; }
+
+.history-box {
+    margin-top: 1.5rem;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #dcb5f2;
+}
+
+@media (max-width: 768px) {
+    .dnd-wrapper {
+        grid-template-columns: 1fr;
     }
 }

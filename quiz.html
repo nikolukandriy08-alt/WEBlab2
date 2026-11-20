@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛР4 Інтерактивний тест з JavaScript</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>Лабораторна робота №4: JavaScript & DOM</h1>
+    <div class="student-badge">
+        <span><strong>Студент:</strong> Ніколюк Андрій</span> |
+        <span><strong>Група:</strong> ТР-52</span>
+        <p class="variant-title">ТЕМА: КОМПЛЕКСНИЙ ТЕСТ: JS, DOM, ОБ'ЄКТИ, ФОРМИ</p>
+    </div>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Головна (Ейнштейн)</a></li>
+            <li><a href="contact.html">Контакти</a></li>
+            <li><a href="quiz.html">Тест JS (ЛР4)</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main">
+    <section id="start-screen" class="main-info">
+        <h2>Реєстрація учасника тестування</h2>
+        <form id="start-form" class="custom-form" novalidate>
+            <fieldset>
+                <legend>Дані студента</legend>
+
+                <div class="form-group">
+                    <label for="student-name">Ваше ім'я та прізвище:</label>
+                    <input type="text" id="student-name" name="studentName"
+                           placeholder="Наприклад: Андрій Ніколюк" required minlength="3">
+                    <small class="error-msg" id="name-error"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="student-group">Академічна група:</label>
+                    <input type="text" id="student-group" name="studentGroup"
+                           placeholder="Наприклад: ТР-52" required pattern="^[А-ЯІЇЄҐA-Z]{2}-\d{2}$">
+                    <small class="error-msg" id="group-error"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficulty-level">Оберіть рівень складності (10 випадкових питань із 15):</label>
+                    <select id="difficulty-level" name="difficulty" required>
+                        <option value="easy">Початковий рівень (Easy)</option>
+                        <option value="medium">Середній рівень (Medium)</option>
+                        <option value="hard">Складний рівень (Hard)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Почати тестування</button>
+            </fieldset>
+        </form>
+
+        <div id="history-block" class="history-box">
+            <h3>Останні результати (localStorage)</h3>
+            <div id="history-list">Поки що немає збережених спроб.</div>
+            <button type="button" id="clear-history-btn" class="btn-reset" style="margin-top: 10px;">
+                Очистити історію
+            </button>
+        </div>
+    </section>
+
+    <section id="quiz-screen" class="main-info hidden">
+        <div class="quiz-header-bar">
+            <span id="player-display"></span>
+            <span id="progress-display">Питання 1 з 10</span>
+        </div>
+
+        <form id="quiz-form">
+            <div id="question-container"></div>
+
+            <div class="form-actions">
+                <button type="submit" id="next-btn" class="btn-submit">Відповісти та далі ➔</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="result-screen" class="main-info hidden">
+        <h2>Результати тестування</h2>
+        <div id="score-summary" class="score-box"></div>
+        <div id="detailed-results"></div>
+        <div class="form-actions">
+            <button type="button" id="restart-btn" class="btn-submit">Пройти тест ще раз</button>
+        </div>
+    </section>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
