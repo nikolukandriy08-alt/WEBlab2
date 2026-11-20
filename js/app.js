@@ -1,7 +1,3 @@
-/* ==========================================================================
-   1. КЛАСИ ES6+ ТА НАСЛІДУВАННЯ ДЛЯ МОДЕЛІ ПИТАНЬ ТЕСТУ
-   ========================================================================== */
-
 class Question {
     constructor(id, level, type, prompt, points = 1) {
         this.id = id;
@@ -11,7 +7,6 @@ class Question {
         this.points = points;
     }
 
-    // Статичний метод перемішування масиву (алгоритм Фішера — Єйтса)
     static shuffle(array) {
         const copy = [...array];
         for (let i = copy.length - 1; i > 0; i--) {
@@ -30,7 +25,6 @@ class Question {
     }
 }
 
-// 1. Питання з однією правильною відповіддю (Radio buttons)
 class RadioQuestion extends Question {
     constructor(id, level, prompt, options, correctAnswer) {
         super(id, level, 'Одна правильна відповідь (Radio)', prompt, 1);
@@ -71,7 +65,6 @@ class RadioQuestion extends Question {
     }
 }
 
-// 2. Питання з кількома правильними відповідями (Checkboxes)
 class CheckboxQuestion extends Question {
     constructor(id, level, prompt, options, correctAnswers) {
         super(id, level, 'Кілька правильних відповідей (Checkbox)', prompt, 2);
@@ -117,7 +110,6 @@ class CheckboxQuestion extends Question {
     }
 }
 
-// 3. Вибір зі списку (Select)
 class SelectQuestion extends Question {
     constructor(id, level, prompt, options, correctAnswer) {
         super(id, level, 'Випадаючий список (Select)', prompt, 1);
@@ -160,7 +152,6 @@ class SelectQuestion extends Question {
     }
 }
 
-// 4. Написання коду / Заповнення пропусків / Виправлення помилок (Text / Textarea з динамічною перевіркою)
 class TextQuestion extends Question {
     constructor(id, level, subtypeLabel, prompt, codeSnippet, acceptedAnswers, isMultiline = false) {
         super(id, level, subtypeLabel, prompt, 2);
@@ -190,7 +181,6 @@ class TextQuestion extends Question {
             </div>
         `;
 
-        // Динамічна перевірка під час введення (подія input)
         const inputEl = document.getElementById(`text_q_${this.id}`);
         const statusEl = document.getElementById(`live-status-${this.id}`);
         inputEl.addEventListener('input', () => {
@@ -233,11 +223,10 @@ class TextQuestion extends Question {
     }
 }
 
-// 5. Встановлення відповідності (Drag & Drop API)
 class DragDropQuestion extends Question {
     constructor(id, level, prompt, pairs) {
         super(id, level, 'Встановлення відповідності (Drag & Drop)', prompt, 2);
-        this.pairs = pairs; // [{ term: '...', definition: '...' }]
+        this.pairs = pairs;
     }
 
     render(container) {
@@ -278,14 +267,12 @@ class DragDropQuestion extends Question {
         const root = document.getElementById(`dnd-root-${this.id}`);
         const pool = document.getElementById(`dnd-pool-${this.id}`);
 
-        // Делегування подій dragstart
         root.addEventListener('dragstart', (e) => {
             if (e.target.classList.contains('dnd-item')) {
                 e.dataTransfer.setData('text/plain', e.target.id);
             }
         });
 
-        // Події на зонах скидання
         const zones = root.querySelectorAll('.dnd-dropzone');
         zones.forEach(zone => {
             zone.addEventListener('dragover', (e) => {
@@ -304,7 +291,6 @@ class DragDropQuestion extends Question {
                 const draggedEl = document.getElementById(draggedId);
                 if (!draggedEl) return;
 
-                // Якщо в зоні вже є елемент — повертаємо його в пул
                 const existing = zone.querySelector('.dnd-item');
                 if (existing) {
                     pool.appendChild(existing);
@@ -314,7 +300,6 @@ class DragDropQuestion extends Question {
             });
         });
 
-        // Делегування кліку: повернення елемента назад у пул
         root.addEventListener('click', (e) => {
             if (e.target.classList.contains('dnd-item') && e.target.parentElement.classList.contains('dnd-dropzone')) {
                 const zone = e.target.parentElement;
@@ -354,12 +339,7 @@ class DragDropQuestion extends Question {
     }
 }
 
-/* ==========================================================================
-   2. БАНК ПИТАНЬ (45 ПИТАНЬ: ПО 15 НА КОЖЕН ІЗ 3 РІВНІВ СКЛАДНОСТІ)
-   ========================================================================== */
-
 const questionBank = [
-    // ==================== ПОЧАТКОВИЙ РІВЕНЬ (EASY — 15 ПИТАНЬ) ====================
     new RadioQuestion(1, 'easy', 'Яке ключове слово використовується для оголошення константи в JavaScript?', ['const', 'let', 'var', 'static'], 'const'),
     new RadioQuestion(2, 'easy', 'Який метод виводить повідомлення у консоль браузера?', ['console.log()', 'print()', 'alert.log()', 'document.writeConsole()'], 'console.log()'),
     new RadioQuestion(3, 'easy', 'Яке значення поверне вираз typeof "Hello"?', ['"string"', '"text"', '"char"', '"object"'], '"string"'),
@@ -380,7 +360,6 @@ const questionBank = [
     new RadioQuestion(14, 'easy', 'Який метод додає елемент у кінець масиву?', ['push()', 'pop()', 'shift()', 'unshift()'], 'push()'),
     new SelectQuestion(15, 'easy', 'Яке значення має неініціалізована змінна let x;?', ['undefined', 'null', '0', 'NaN'], 'undefined'),
 
-    // ==================== СЕРЕДНІЙ РІВЕНЬ (MEDIUM — 15 ПИТАНЬ) ====================
     new RadioQuestion(16, 'medium', 'Що повертає метод document.querySelectorAll(".item")?', ['Статичний NodeList', 'Живу HTMLCollection', 'Звичайний масив Array', 'Перший знайдений елемент'], 'Статичний NodeList'),
     new RadioQuestion(17, 'medium', 'Який метод скасовує стандартну дію браузера (наприклад, перезавантаження при submit)?', ['event.preventDefault()', 'event.stopPropagation()', 'event.cancelBubble()', 'return false'], 'event.preventDefault()'),
     new RadioQuestion(18, 'medium', 'Який метод масиву створює новий масив, трансформуючи кожен елемент?', ['map()', 'forEach()', 'filter()', 'find()'], 'map()'),
@@ -401,7 +380,6 @@ const questionBank = [
     new RadioQuestion(29, 'medium', 'Що таке спливання подій (Event Bubbling)?', ['Поширення події від цільового елемента вгору до батьківських', 'Поширення події від document вниз до елемента', 'Видалення обробника події після спрацювання', 'Асинхронний виклик колбеку'], 'Поширення події від цільового елемента вгору до батьківських'),
     new SelectQuestion(30, 'medium', 'Який метод classList перемикає клас (додає, якщо немає, і видаляє, якщо є)?', ['toggle()', 'switch()', 'replace()', 'contains()'], 'toggle()'),
 
-    // ==================== СКЛАДНИЙ РІВЕНЬ (HARD — 15 ПИТАНЬ) ====================
     new RadioQuestion(31, 'hard', 'Яке ключове слово використовується в конструкторі підкласу для виклику конструктора батьківського класу?', ['super()', 'parent()', 'this()', 'extends()'], 'super()'),
     new RadioQuestion(32, 'hard', 'Чому в обробнику події dragover обов’язково викликати event.preventDefault()?', ['Щоб дозволити скидання елемента (подію drop)', 'Щоб зупинити анімацію перетягування', 'Щоб очистити dataTransfer', 'Щоб уникнути спливання події'], 'Щоб дозволити скидання елемента (подію drop)'),
     new RadioQuestion(33, 'hard', 'Який метод використовується для передачі текстових даних під час Drag & Drop?', ['e.dataTransfer.setData("text/plain", id)', 'e.clipboardData.set("text", id)', 'e.target.setDragData(id)', 'localStorage.setDrag(id)'], 'e.dataTransfer.setData("text/plain", id)'),
@@ -423,10 +401,6 @@ const questionBank = [
     new SelectQuestion(45, 'hard', 'Який метод DOM видаляє сам елемент із дерева без звернення до parentNode?', ['element.remove()', 'element.delete()', 'element.detach()', 'document.destroy(element)'], 'element.remove()')
 ];
 
-/* ==========================================================================
-   3. КЛАС QUIZ ДЛЯ УПРАВЛІННЯ ТЕСТОМ ТА LOCALSTORAGE
-   ========================================================================== */
-
 class Quiz {
     constructor(allQuestions) {
         this.allQuestions = allQuestions;
@@ -440,7 +414,6 @@ class Quiz {
 
     start(name, group, level) {
         this.student = { name, group, level };
-        // Фільтруємо питання за рівнем складності та беремо 10 випадкових із 15
         const filtered = this.allQuestions.filter(q => q.level === level);
         this.currentQuestions = Question.shuffle(filtered).slice(0, 10);
         this.currentIndex = 0;
@@ -483,13 +456,9 @@ class Quiz {
     }
 }
 
-/* ==========================================================================
-   4. ІНІЦІАЛІЗАЦІЯ ДОДАТКУ, ВАЛІДАЦІЯ ФОРМИ ТА ОБРОБКА ПОДІЙ DOM
-   ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     const startForm = document.getElementById('start-form');
-    if (!startForm) return; // Якщо скрипт підключено на іншій сторінці
+    if (!startForm) return;
 
     const quiz = new Quiz(questionBank);
 
@@ -510,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizForm = document.getElementById('quiz-form');
     const nextBtn = document.getElementById('next-btn');
 
-    // Відображення історії з localStorage
     function renderHistory() {
         const historyList = document.getElementById('history-list');
         const history = JSON.parse(localStorage.getItem('js_quiz_history')) || [];
@@ -533,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderHistory();
     });
 
-    // Валідація форми реєстрації
     function validateStartForm() {
         let valid = true;
         nameError.textContent = '';
@@ -556,7 +523,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return valid;
     }
 
-    // Початок тесту
     startForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (!validateStartForm()) return;
@@ -580,7 +546,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQ.render(questionContainer);
     }
 
-    // Обробка відповіді на поточне питання
     quizForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const hasMore = quiz.submitCurrentAnswer(quizForm);
@@ -592,7 +557,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Виведення фінальних результатів
     function showResults() {
         quiz.saveToLocalStorage();
         quizScreen.classList.add('hidden');
@@ -615,7 +579,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Перезапуск тесту
     document.getElementById('restart-btn').addEventListener('click', () => {
         resultScreen.classList.add('hidden');
         startScreen.classList.remove('hidden');
